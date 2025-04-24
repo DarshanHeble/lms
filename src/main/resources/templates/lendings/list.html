@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Book Lendings - Library Management System</title>
+</head>
+<body>
+    <main>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Book Lendings</h2>
+            <a href="/lendings/new" class="btn btn-primary">New Lending</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Book Title</th>
+                        <th>Book Author</th>
+                        <th>User Name</th>
+                        <th>User Email</th>
+                        <th>Borrow Date</th>
+                        <th>Due Date</th>
+                        <th>Return Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="lending : ${lendings}">
+                        <td th:text="${lending.bookTitle}">Book Title</td>
+                        <td th:text="${lending.bookAuthor}">Book Author</td>
+                        <td th:text="${lending.userName}">User Name</td>
+                        <td th:text="${lending.userEmail}">user@email.com</td>
+                        <td th:text="${#temporals.format(lending.issueDate, 'yyyy-MM-dd')}">2024-04-24</td>
+                        <td th:text="${#temporals.format(lending.dueDate, 'yyyy-MM-dd')}">2024-05-24</td>
+                        <td th:text="${lending.returnDate != null ? #temporals.format(lending.returnDate, 'yyyy-MM-dd') : '-'}">-</td>
+                        <td>
+                            <span th:if="${lending.returnDate == null}" class="badge bg-warning">Borrowed</span>
+                            <span th:if="${lending.returnDate != null}" class="badge bg-success">Returned</span>
+                        </td>
+                        <td>
+                            <a th:if="${lending.returnDate == null}" 
+                               th:href="@{/lendings/return/{id}(id=${lending.id})}" 
+                               class="btn btn-sm btn-success"
+                               onclick="return confirm('Are you sure you want to return this book?')">
+                                Return Book
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(lendings)}">
+                        <td colspan="9" class="text-center">No lendings found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Welcome - Library Management System</title>
+</head>
+<body>
+    <main>
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to Library Management System</h1>
+            <p class="lead">Manage your library's books, users, and lending operations efficiently.</p>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Books Management</h5>
+                            <p class="card-text">Add, edit, and manage your library's book collection.</p>
+                            <a href="/books" class="btn btn-primary">Manage Books</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Users Management</h5>
+                            <p class="card-text">Manage library members and their information.</p>
+                            <a href="/users" class="btn btn-primary">Manage Users</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Book Lending</h5>
+                            <p class="card-text">Handle book borrowing and returns.</p>
+                            <a href="/lendings" class="btn btn-primary">Manage Lendings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
